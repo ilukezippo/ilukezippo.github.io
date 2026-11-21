@@ -48,7 +48,6 @@ h1,h2,h3{font-family:"Inter Tight",Inter,system-ui,sans-serif;letter-spacing:-.0
 .bar i:last-child::before,.bar i:last-child::after{content:"";position:absolute;left:5px;top:-1px;width:1.5px;height:14px;background:#8a9995;transform:rotate(45deg)}
 .bar i:last-child::after{transform:rotate(-45deg)}
 .screen{height:clamp(240px,34vw,450px);display:grid;place-items:center;background:radial-gradient(120% 90% at 50% 0%,#2a3532,#141a19);position:relative}
-.screen img{max-height:92%;max-width:94%;width:auto;object-fit:contain;border-radius:6px;box-shadow:0 12px 40px rgba(0,0,0,.45);transition:opacity .25s}
 .screen .tile{display:grid;justify-items:center;gap:14px;color:#e5ece9;text-align:center;padding:20px}
 .screen .tile img{width:120px;height:120px;box-shadow:none}
 .screen .tile p{margin:0;max-width:40ch;color:#b6c6c1}
@@ -68,7 +67,7 @@ h1,h2,h3{font-family:"Inter Tight",Inter,system-ui,sans-serif;letter-spacing:-.0
 .app{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px 48px;padding-block:clamp(36px,5vw,64px);border-bottom:1px solid var(--line);align-items:start}
 .app:nth-of-type(even) .shots{order:2}
 .shots .main{background:color-mix(in srgb,var(--c) 14%,var(--panel));border-radius:14px;padding:clamp(12px,2.2vw,24px);display:grid;place-items:center;aspect-ratio:16/10.5}
-.shots .main img{max-height:100%;width:auto;max-width:100%;object-fit:contain;border-radius:6px;box-shadow:0 10px 30px -10px rgba(0,0,0,.4);cursor:zoom-in}
+.shots .main>img{cursor:zoom-in}
 .thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .thumbs button{width:84px;height:58px;padding:3px;border:2px solid transparent;border-radius:8px;background:var(--panel);cursor:pointer}
 .thumbs button[aria-pressed=true]{border-color:var(--c)}
@@ -132,9 +131,8 @@ dialog button{margin:10px auto 0;display:block;min-height:44px;padding:0 22px;bo
 .shots .main:has(video){padding:0;background:#000;overflow:hidden}
 .dl-ver{font-size:13px;color:var(--mute);margin:10px 0 0;overflow-wrap:anywhere}
 .shots .main{position:relative;--pad:clamp(12px,2.2vw,24px)}
-.shots .main>img{position:absolute;inset:var(--pad);margin:auto;max-width:calc(100% - 2*var(--pad));max-height:calc(100% - 2*var(--pad))}
-.screen{--sh:clamp(240px,34vw,450px);height:var(--sh)}
-.screen>img{max-height:calc(var(--sh) - 32px)}
+.shots .main>img,.screen>img{position:absolute;inset:var(--pad);width:calc(100% - 2*var(--pad));height:calc(100% - 2*var(--pad));max-width:none;object-fit:contain;filter:drop-shadow(0 10px 22px rgba(0,0,0,.35))}
+.screen{--pad:16px}
 @media(max-width:900px){.top,.gh,.about .wrap{grid-template-columns:minmax(0,1fr)}.app{grid-template-columns:minmax(0,1fr)}.app:nth-of-type(even) .shots{order:0}}
 @media(max-width:600px){.task{justify-content:flex-start}.bar em{display:none}.go{right:8px;top:8px;bottom:auto;padding:6px 12px;font-size:13px}.stack{grid-template-columns:minmax(0,1fr)}.nav a.l{font-size:15px}.brand{flex-basis:100%}.thumbs button{width:64px;height:46px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.screen img{transition:none}}
@@ -217,7 +215,8 @@ const apps=[
  desc:'An offline, zero-click file converter and toolbox. While you drag a file in Explorer, a radial menu opens under the cursor: tap Shift to convert, Ctrl for tools, Alt for actions, then release on a slice. Results land next to the original, which is never changed.',
  f:['Convert images, video, audio, documents and archives (HEIC to JPG, video to MP4, folder to 7z…)','Tools wheel: compress, crop and resize, trim with a preview, merge, split','Float videos and pictures on top of other windows, plus desktop sticky notes','Browser extension for Chrome and Firefox, Send to phone by QR code'],
  meta:['Windows 10 / 11','Installer or portable','MIT','Python'],
- shots:[['dw-combo','Try the wheel: hover a slice','wheel'],['/DragWheel/video/dragwheel-poster.jpg','Watch the video (under 2 minutes)','video'],['dw-combo','The Convert, Tools and Actions wheels'],['dw-slices','Choose which slices each wheel shows'],['dw-editor','Built-in photo editor'],['dw-archives','Archive tools'],['dw-arabic','Full Arabic interface']]},
+ hero:['dw-combo','Try the wheel: hover a slice','wheel'],
+ shots:[['dw-combo','The Convert, Tools and Actions wheels'],['/DragWheel/video/dragwheel-poster.jpg','Watch the video (under 2 minutes)','video'],['dw-slices','Choose which slices each wheel shows'],['dw-editor','Built-in photo editor'],['dw-archives','Archive tools'],['dw-arabic','Full Arabic interface']]},
 {id:'vcf-desk',dl:'exe',g:1,name:'VCF Desk',repo:'VCF-Desk',c:'#7b8cff',icon:'img/vcf-icon.webp',tag:'Contacts manager for Windows.',
  desc:'A free, modern vCard (.vcf) editor. Open the contacts exported from your phone, fix them, and send them anywhere. Fields it doesn\'t display are kept exactly as they were, and Arabic names are never garbled.',
  f:['Opens exports from Android, iPhone, Google Contacts, Outlook and Samsung','Search by name, phone or email; bulk-edit many contacts at once','Import from vCard, Excel, CSV or Access, with Arabic headings matched automatically','Export for Android, iPhone, Google, Outlook, Excel or Access, or edit the raw vCard'],
@@ -252,12 +251,12 @@ const apps=[
  desc:'A Decky Loader plugin that starts a trainer or other Windows program alongside your game in the same Proton environment, right from the game\'s menu in Gaming Mode, and manages launch options for you.',
  f:['Pick an .exe or .bat to run next to the game; it closes when the game exits','Search FLiNG Trainer and attach a trainer without leaving Gaming Mode','Set the game language through locale variables','One-tap launch options: desktop mode, no FSYNC, WineD3D, audio latency and more'],
  meta:['Steam Deck','Decky Loader','GPL 3.0','TypeScript'],
- shots:[['cd-menu','CheatDeck 2 in the game menu'],['cd-settings','Trainer and language settings'],['cd-trainer','A trainer running beside the game']]},
+ shots:[['cd-normal','Normal tab: pick a trainer and language'],['cd-menu','CheatDeck 2 in the game menu'],['cd-trainer','A trainer running beside the game'],['cd-results','Search FLiNG trainers'],['cd-versions','Pick a trainer version'],['cd-advanced','Advanced launch options'],['cd-custom','Custom launch options']]},
 {id:'trainer-overlay',dl:'exe',g:2,name:'Trainer Overlay',repo:'trainer-overlay',c:'#7a4fba',icon:'img/to-icon.webp',tag:'Game trainers you can use from the couch.',
  desc:'A lightweight overlay for managing and using game trainers with a controller. It slides in over your game without stealing focus, reads a JSON trainer library, and can download trainers straight from GitHub. For offline, single-player games.',
  f:['Controller-first: XInput (Xbox, ROG Ally) and DirectInput (PS4, PS5)','Toggle with Shift+Insert or L2+R2+L3+R3','Toggle and apply-style cheats from a JSON library','Tray icon and Steam-style interface sounds'],
  meta:['Windows','Installer or portable','C++'],
- shots:[['to-overlay','The overlay, driven with a controller']]},
+ shots:[['to-loaded','A trainer loaded in the overlay'],['to-download','Download Cheats'],['to-choose','Choose Game']]},
 {id:'pc-savegame-manager',dl:'exe',g:2,name:'PC Savegame Manager',repo:'PC_Savegame_Manager',c:'#2b8159',icon:'img/savegame-icon.webp',tag:'Back up, restore and sync your PC game saves.',
  desc:'Type a game\'s name and it finds where the saves live using PCGamingWiki, then backs them up to timestamped ZIP files that remember where to restore them. Link a game to Google Drive to keep saves in sync across PCs.',
  f:['Save locations from PCGamingWiki, with autocomplete game search','Timestamped ZIP backups with restore paths stored inside','Restores to the original folders, with an overwrite warning','Google Drive sync between two or more PCs through a Windows junction'],
@@ -330,7 +329,7 @@ apps.forEach(async a=>{
 const show=(a)=>{
   $('#wIcon').src=a.icon||'data:image/svg+xml;utf8,'+encodeURIComponent(a.svg.replace('<svg ','<svg xmlns="http://www.w3.org/2000/svg" '));
   $('#wName').textContent=a.name;$('#wTag').textContent='  '+a.tag;
-  $('#screen').innerHTML=(a.shots?media(a,a.shots[0]):`<div class="tile">${ico(a)}<h3 style="font-size:28px">${a.name}</h3><p>${a.tag}</p></div>`)+`<a class="go" href="#${a.id}">More about ${a.name}</a>`;
+  $('#screen').innerHTML=(a.shots?media(a,a.hero||a.shots[0]):`<div class="tile">${ico(a)}<h3 style="font-size:28px">${a.name}</h3><p>${a.tag}</p></div>`)+`<a class="go" href="#${a.id}">More about ${a.name}</a>`;
   wheels($('#screen'));
   document.querySelectorAll('#task button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.id==a.id));
 };
