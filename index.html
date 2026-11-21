@@ -108,8 +108,31 @@ dialog{border:0;padding:0;background:transparent;max-width:96vw;max-height:94vh}
 dialog::backdrop{background:rgba(0,10,8,.85)}
 dialog img{max-width:96vw;max-height:88vh;border-radius:8px}
 dialog button{margin:10px auto 0;display:block;min-height:44px;padding:0 22px;border-radius:999px;border:0;background:#fff;font:600 15px Inter,sans-serif;cursor:pointer}
+.dw{display:grid;justify-items:center;align-content:center;gap:10px;width:100%;height:100%}
+.dw svg{height:calc(100% - 76px);min-height:200px;width:auto;max-width:100%;overflow:visible;filter:drop-shadow(0 14px 24px rgba(0,0,0,.35))}
+.dw .sl{cursor:pointer}
+.dw .sl path{fill:#2b2c30;transition:fill .12s}
+.dw .sl text{fill:#f2f2f4;font:700 15px Inter,"Segoe UI",sans-serif;pointer-events:none}
+.dw .sl.on path{fill:var(--h,#ff8c1a)}
+.dw .sl.on text{fill:#1b1206}
+.dw .sl:focus{outline:none}
+.dw .sl:focus-visible path{stroke:#ff8c1a;stroke-width:3}
+.dw .ht{fill:#ff8c1a;font:800 22px "Inter Tight",Inter,sans-serif}
+.dw .hs{fill:#a9adb5;font:500 13px Inter,sans-serif}
+.dw .pills{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.dw .pills button{min-height:36px;padding:0 14px;border-radius:999px;border:0;background:#2b2c30;color:#f1f1f3;font:600 14px Inter,sans-serif;cursor:pointer}
+.dw .pills button[aria-pressed=true]{background:#ff8c1a;color:#1b1206}
+.dw .pills kbd{font:inherit;font-weight:800;margin-right:5px}
+.dw p{margin:0;font-size:14px;color:#4b5c57;min-height:1.4em;text-align:center}
+.screen .dw p{color:#b6c6c1}
+.screen .dw{padding:12px 0;height:auto}
+.screen .dw svg{height:clamp(170px,calc(34vw - 120px),330px);min-height:0}
+.screen .dw .pills button{min-height:32px}
+.shots .main video,.screen video{width:100%;height:100%;object-fit:contain;background:#000;border-radius:6px}
+.shots .main:has(video){padding:0;background:#000;overflow:hidden}
+.dl-ver{font-size:13px;color:var(--mute);margin:10px 0 0;overflow-wrap:anywhere}
 @media(max-width:900px){.top,.gh,.about .wrap{grid-template-columns:minmax(0,1fr)}.app{grid-template-columns:minmax(0,1fr)}.app:nth-of-type(even) .shots{order:0}}
-@media(max-width:600px){.task{justify-content:flex-start}.bar em{display:none}.go{right:10px;bottom:10px}.stack{grid-template-columns:minmax(0,1fr)}.nav a.l{font-size:15px}.brand{flex-basis:100%}.thumbs button{width:64px;height:46px}}
+@media(max-width:600px){.task{justify-content:flex-start}.bar em{display:none}.go{right:8px;top:8px;bottom:auto;padding:6px 12px;font-size:13px}.stack{grid-template-columns:minmax(0,1fr)}.nav a.l{font-size:15px}.brand{flex-basis:100%}.thumbs button{width:64px;height:46px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.screen img{transition:none}}
 </style>
 </head>
@@ -187,52 +210,52 @@ const GH='https://github.com/ilukezippo/';
 const toSvg=`<svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#e04f5f"/><rect x="12" y="18" width="40" height="28" rx="6" fill="none" stroke="#fff" stroke-width="4"/><path d="M22 32h8M26 28v8" stroke="#fff" stroke-width="4" stroke-linecap="round"/><circle cx="38" cy="30" r="2.6" fill="#fff"/><circle cx="43" cy="35" r="2.6" fill="#fff"/></svg>`;
 const cdSvg=`<svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1a9fff"/><rect x="10" y="20" width="44" height="24" rx="12" fill="#fff"/><circle cx="22" cy="32" r="5" fill="#1a9fff"/><circle cx="42" cy="29" r="2.5" fill="#1a9fff"/><circle cx="47" cy="34" r="2.5" fill="#1a9fff"/></svg>`;
 const apps=[
-{id:'dragwheel',g:1,name:'DragWheel',c:'#ff8c1a',icon:'img/dragwheel-icon.webp',tag:'Drag a file. Tap a key. Drop it on the wheel.',
+{id:'dragwheel',dl:'exe',g:1,name:'DragWheel',c:'#ff8c1a',icon:'img/dragwheel-icon.webp',tag:'Drag a file. Tap a key. Drop it on the wheel.',
  desc:'An offline, zero-click file converter and toolbox. While you drag a file in Explorer, a radial menu opens under the cursor: tap Shift to convert, Ctrl for tools, Alt for actions, then release on a slice. Results land next to the original, which is never changed.',
  f:['Convert images, video, audio, documents and archives (HEIC to JPG, video to MP4, folder to 7z…)','Tools wheel: compress, crop and resize, trim with a preview, merge, split','Float videos and pictures on top of other windows, plus desktop sticky notes','Browser extension for Chrome and Firefox, Send to phone by QR code'],
  meta:['Windows 10 / 11','Installer or portable','MIT','Python'],
- shots:[['dw-combo','The Convert, Tools and Actions wheels'],['dw-slices','Choose which slices each wheel shows'],['dw-editor','Built-in photo editor'],['dw-archives','Archive tools'],['dw-arabic','Full Arabic interface']]},
-{id:'vcf-desk',g:1,name:'VCF Desk',repo:'VCF-Desk',c:'#7b8cff',icon:'img/vcf-icon.webp',tag:'Contacts manager for Windows.',
+ shots:[['dw-combo','Try the wheel: hover a slice','wheel'],['/DragWheel/video/dragwheel-poster.jpg','Watch the video (under 2 minutes)','video'],['dw-combo','The Convert, Tools and Actions wheels'],['dw-slices','Choose which slices each wheel shows'],['dw-editor','Built-in photo editor'],['dw-archives','Archive tools'],['dw-arabic','Full Arabic interface']]},
+{id:'vcf-desk',dl:'exe',g:1,name:'VCF Desk',repo:'VCF-Desk',c:'#7b8cff',icon:'img/vcf-icon.webp',tag:'Contacts manager for Windows.',
  desc:'A free, modern vCard (.vcf) editor. Open the contacts exported from your phone, fix them, and send them anywhere. Fields it doesn\'t display are kept exactly as they were, and Arabic names are never garbled.',
  f:['Opens exports from Android, iPhone, Google Contacts, Outlook and Samsung','Search by name, phone or email; bulk-edit many contacts at once','Import from vCard, Excel, CSV or Access, with Arabic headings matched automatically','Export for Android, iPhone, Google, Outlook, Excel or Access, or edit the raw vCard'],
  meta:['Windows 10 / 11','Installer or portable','MIT','Python'],
  shots:[['vcf-main','Contact list and editor'],['vcf-bulk','Bulk edit a field on many contacts'],['vcf-import','Import from Excel, CSV or Access'],['vcf-export','Export to any format'],['vcf-raw','Raw vCard view']]},
-{id:'subscout',g:1,name:'SubScout',c:'#7c5cff',icon:'img/subscout-icon.webp',tag:'English and Arabic subtitles for your whole library.',
+{id:'subscout',dl:'exe',g:1,name:'SubScout',c:'#7c5cff',icon:'img/subscout-icon.webp',tag:'English and Arabic subtitles for your whole library.',
  desc:'Point it at a movie, TV-series or anime folder. SubScout scans every video, works out the title, year and IMDb ID, and downloads only the subtitles that are missing, saved as Movie.en.srt and Movie.ar.srt.',
  f:['Several sources with automatic fallback: YTS Subs, SubDL, SubSource, OpenSubtitles, Gestdown','Respects rate limits and retries skipped files in a second pass','Handles season packs and fansub anime naming','Converts old Arabic subtitles to UTF-8 so every player shows them'],
  meta:['Windows 10 / 11','Single .exe','Python'],
  shots:[['ss-main','Scanning a movie folder']]},
-{id:'windows-app-updater',g:1,name:'Windows App Updater',repo:'Windows-App-Updater',c:'#2f6fe8',icon:'img/updater-icon.webp',tag:'Keep every installed app up to date, in one click.',
+{id:'windows-app-updater',dl:'exe',g:1,name:'Windows App Updater',repo:'Windows-App-Updater',c:'#2f6fe8',icon:'img/updater-icon.webp',tag:'Keep every installed app up to date, in one click.',
  desc:'A clean front end for Microsoft\'s winget. See which apps have updates, tick the ones you want and update them all at once, with each result shown in its own status column instead of a wall of text.',
  f:['Check, select and update many apps in one batch','Run as admin to install silently, without a UAC prompt for each app','Skip a stuck app or cancel the whole batch','Filter, sort, and clean up winget\'s temporary files; light and dark themes'],
  meta:['Windows 10 / 11','Single .exe','MIT','Python'],
  shots:[['wau-updating','Updating apps, dark theme'],['wau-dark','Available updates'],['wau-light','Light theme']]},
-{id:'windows-fixer',g:1,name:'Windows Fixer',repo:'Windows_Fixer',c:'#0a84c6',icon:'img/fixer-icon.webp',tag:'Repair and clean up Windows, in one window.',
+{id:'windows-fixer',dl:'zip',g:1,name:'Windows Fixer',repo:'Windows_Fixer',c:'#0a84c6',icon:'img/fixer-icon.webp',tag:'Repair and clean up Windows, in one window.',
  desc:'The repair commands you are usually told to type into an admin Command Prompt, collected in one window. Tick the steps you want, press Start, and follow along with a progress bar and a live log. In English and Arabic.',
  f:['Repair: DISM ScanHealth and RestoreHealth, sfc /scannow, CHKDSK, network reset','Cleanup: temp and prefetch files, Recycle Bin, DNS cache, component store','Fixes stuck Windows Update downloads','Skip a step or cancel at any time; always-run-as-admin option'],
  meta:['Windows 10 / 11','Portable ZIP','MIT','Python'],
  chips:['DISM','SFC','CHKDSK','Network reset','Temp cleanup','DNS flush','Windows Update fix','English / العربية']},
-{id:'turbotap',g:2,name:'TurboTap',c:'#6a6aff',icon:'img/turbotap-icon.webp',tag:'Hold a button. TurboTap taps it for you.',
+{id:'turbotap',dl:'exe',g:2,name:'TurboTap',c:'#6a6aff',icon:'img/turbotap-icon.webp',tag:'Hold a button. TurboTap taps it for you.',
  desc:'Rapid-fire for your keyboard, mouse and game controller. Hold a key and it taps up to 50 times a second, or press once to auto-tap until you press again. Made for button-mashing games.',
  f:['Keyboard, mouse and controllers: DualSense, DualShock 4, Xbox, Switch Pro','1–50 taps per second, hold or toggle mode, optional human-like randomizing','Built-in tester shows the real taps per second','Limit turbo to one game window, F8 on/off hotkey, per-game profiles'],
  meta:['Windows 10 / 11','Single .exe','MIT','Python'],
  shots:[['tt-main','Speed and options'],['tt-tester','Tester with turbo on the E key'],['tt-keyboard','Keyboard tab'],['tt-controller','Controller setup'],['tt-pad','Tester with a PS5 controller']]},
-{id:'xbox-iso-extractor',g:2,name:'XBOX ISO Extractor',repo:'XBOX-ISO-Extractor',c:'#107c10',icon:'img/xbox-icon.webp',tag:'Extract, create and convert Original Xbox and Xbox 360 ISOs.',
+{id:'xbox-iso-extractor',dl:'zip',g:2,name:'XBOX ISO Extractor',repo:'XBOX-ISO-Extractor',c:'#107c10',icon:'img/xbox-icon.webp',tag:'Extract, create and convert Original Xbox and Xbox 360 ISOs.',
  desc:'A modern window for the extract-xiso and iso2god command-line tools. Pick a mode, drop in one ISO or a whole folder, and watch the live log. An updated and enhanced take on extract-xiso-gui by KilLo445.',
  f:['Original Xbox: extract, create a bootable XISO, rewrite to strip padding, list files','Xbox 360: extract to XEX folders or convert to Games on Demand, with trimming','Batch processing and drag and drop','Deletes source ISOs only after a verified successful process'],
  meta:['Windows 10 / 11','Portable ZIP','MIT','C# / WPF'],
  shots:[['xb-main','Main window']]},
-{id:'cheatdeck-2',g:2,name:'CheatDeck 2',repo:'CheatDeck2',c:'#1a9fff',svg:cdSvg,tag:'Trainers and launch options on Steam Deck.',
+{id:'cheatdeck-2',dl:'zip',g:2,name:'CheatDeck 2',repo:'CheatDeck2',c:'#1a9fff',svg:cdSvg,tag:'Trainers and launch options on Steam Deck.',
  desc:'A Decky Loader plugin that starts a trainer or other Windows program alongside your game in the same Proton environment, right from the game\'s menu in Gaming Mode, and manages launch options for you.',
  f:['Pick an .exe or .bat to run next to the game; it closes when the game exits','Search FLiNG Trainer and attach a trainer without leaving Gaming Mode','Set the game language through locale variables','One-tap launch options: desktop mode, no FSYNC, WineD3D, audio latency and more'],
  meta:['Steam Deck','Decky Loader','GPL 3.0','TypeScript'],
  shots:[['cd-menu','CheatDeck 2 in the game menu'],['cd-settings','Trainer and language settings'],['cd-trainer','A trainer running beside the game']]},
-{id:'trainer-overlay',g:2,name:'Trainer Overlay',repo:'trainer-overlay',c:'#e04f5f',svg:toSvg,tag:'Use game trainers from your couch.',
+{id:'trainer-overlay',dl:'exe',g:2,name:'Trainer Overlay',repo:'trainer-overlay',c:'#e04f5f',svg:toSvg,tag:'Use game trainers from your couch.',
  desc:'A lightweight overlay for managing and using game trainers with a controller. It slides in over your game without stealing focus, reads a JSON trainer library, and can download trainers straight from GitHub. For offline, single-player games.',
  f:['Controller-first: XInput (Xbox, ROG Ally) and DirectInput (PS4, PS5)','Toggle with Shift+Insert or L2+R2+L3+R3','Toggle and apply-style cheats from a JSON library','Tray icon and Steam-style interface sounds'],
  meta:['Windows','Installer or portable','C++'],
  chips:['XInput','DirectInput','JSON library','GitHub downloads','Always on top','System tray']},
-{id:'pc-savegame-manager',g:2,name:'PC Savegame Manager',repo:'PC_Savegame_Manager',c:'#2c7a5b',icon:'img/savegame-icon.webp',tag:'Find, back up and restore your game saves.',
+{id:'pc-savegame-manager',dl:'exe',g:2,name:'PC Savegame Manager',repo:'PC_Savegame_Manager',c:'#2c7a5b',icon:'img/savegame-icon.webp',tag:'Find, back up and restore your game saves.',
  desc:'Type a game\'s name and it finds where the saves live using PCGamingWiki, then backs them up to timestamped ZIP files that remember where to restore them. Link a game to Google Drive to keep saves in sync across PCs.',
  f:['Save locations from PCGamingWiki, with autocomplete game search','Timestamped ZIP backups with restore paths stored inside','Restores to the original folders, with an overwrite warning','Google Drive sync between two or more PCs through a Windows junction'],
  meta:['Windows','Single .exe','Python'],
@@ -243,10 +266,12 @@ const ico=(a,cls='')=>a.svg?a.svg:`<img src="${a.icon}" alt="" class="${cls}" wi
 const ghIcon='<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.71 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.66 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg>';
 const dlIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg>';
 const repo=a=>GH+(a.repo||a.name);
+const src=k=>k[0]=='/'?k:`img/${k}.webp`;
+const media=(a,s)=>s[2]=='wheel'?`<div class="dw"></div>`:s[2]=='video'?`<video controls preload="metadata" playsinline poster="${s[0]}"><source src="/DragWheel/video/dragwheel.mp4" type="video/mp4"></video>`:`<img src="${src(s[0])}" alt="${a.name}: ${s[1]}" loading="lazy">`;
 const card=a=>{
-  const shot=a.shots?`<div class="main"><img src="img/${a.shots[0][0]}.webp" alt="${a.name}: ${a.shots[0][1]}" data-app="${a.id}" loading="lazy"></div>`+(a.shots.length>1?`<div class="thumbs">${a.shots.map((s,i)=>`<button type="button" aria-pressed="${i==0}" data-app="${a.id}" data-i="${i}" aria-label="${s[1]}"><img src="img/${s[0]}.webp" alt="" loading="lazy"></button>`).join('')}</div>`:'')
+  const shot=a.shots?`<div class="main">${media(a,a.shots[0])}</div>`+(a.shots.length>1?`<div class="thumbs">${a.shots.map((s,i)=>`<button type="button" aria-pressed="${i==0}" data-app="${a.id}" data-i="${i}" aria-label="${s[1]}"><img src="${src(s[0])}" alt="" loading="lazy"></button>`).join('')}</div>`:'')
     :`<div class="main noshot">${ico(a)}<ul>${a.chips.map(c=>`<li>${c}</li>`).join('')}</ul></div>`;
-  return `<article class="app" id="${a.id}" style="--c:${a.c}"><div class="shots">${shot}</div><div class="info"><div class="head">${ico(a)}<div><h3>${a.name}</h3><div class="tag">${a.tag}</div></div></div><p>${a.desc}</p><ul class="f">${a.f.map(x=>`<li>${x}</li>`).join('')}</ul><div class="meta">${a.meta.map(m=>`<span>${m}</span>`).join('')}</div><div class="btns"><a class="btn p" href="${repo(a)}/releases/latest">${dlIcon}Download</a><a class="btn" href="${repo(a)}">${ghIcon}View on GitHub</a></div></div></article>`;
+  return `<article class="app" id="${a.id}" style="--c:${a.c}"><div class="shots">${shot}</div><div class="info"><div class="head">${ico(a)}<div><h3>${a.name}</h3><div class="tag">${a.tag}</div></div></div><p>${a.desc}</p><ul class="f">${a.f.map(x=>`<li>${x}</li>`).join('')}</ul><div class="meta">${a.meta.map(m=>`<span>${m}</span>`).join('')}</div><div class="btns"><a class="btn p" data-dl="${a.id}" href="${repo(a)}/releases/latest">${dlIcon}Download</a><a class="btn" href="${repo(a)}">${ghIcon}View on GitHub</a></div><p class="dl-ver" data-ver="${a.id}">Latest release on GitHub</p></div></article>`;
 };
 $('#g1').innerHTML=apps.filter(a=>a.g==1).map(card).join('');
 $('#g2').innerHTML=apps.filter(a=>a.g==2).map(card).join('');
@@ -254,17 +279,56 @@ $('#figs').innerHTML=`<div><strong>${apps.length}</strong>apps</div><div><strong
 
 document.addEventListener('click',e=>{
   const t=e.target.closest('.thumbs button');
-  if(t){const a=apps.find(x=>x.id==t.dataset.app),s=a.shots[+t.dataset.i],m=document.querySelector(`#${a.id} .main img`);m.src=`img/${s[0]}.webp`;m.alt=`${a.name}: ${s[1]}`;t.parentNode.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b==t));return}
+  if(t){const a=apps.find(x=>x.id==t.dataset.app),s=a.shots[+t.dataset.i],m=document.querySelector(`#${a.id} .main`);m.innerHTML=media(a,s);wheels(m);if(s[2]=='video'){const v=m.querySelector('video');v.play().catch(()=>{})}t.parentNode.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b==t));return}
   const z=e.target.closest('.shots .main:not(.noshot) img');
   if(z){$('#zImg').src=z.src;$('#zImg').alt=z.alt;const d=$('#zoom');if(d.showModal)d.showModal();}
 });
 $('#zClose').addEventListener('click',()=>$('#zoom').close());
 $('#zoom').addEventListener('click',e=>{if(e.target.id=='zoom')$('#zoom').close()});
 
+const SETS={convert:{hub:'Convert',items:['JPG','PNG','WEBP','AVIF','TIFF','GIF','ICO','PDF'],done:x=>`Saved photo.${x.toLowerCase()} next to the original`},
+ tools:{hub:'Tools',items:['Compress','Crop & Resize','Rotate 90°','Flip','Grayscale','Strip metadata','Zip'],done:x=>`${x} applied, saved as a copy`},
+ actions:{hub:'Actions',items:['Copy','Copy path','Move to…','Copy to…','Open with…','Terminal','Float','Show in Explorer'],done:x=>`${x}: done`}};
+const pt=(r,d)=>{const t=(d-90)*Math.PI/180;return [(r*Math.cos(t)).toFixed(1),(r*Math.sin(t)).toFixed(1)]};
+const wedge=(a0,a1)=>{const R0=80,R1=234,p=[pt(R1,a0),pt(R1,a1),pt(R0,a1),pt(R0,a0)];return `M${p[0]}A${R1},${R1} 0 0 1 ${p[1]}L${p[2]}A${R0},${R0} 0 0 0 ${p[3]}Z`};
+let wn=0;
+function wheels(root){root.querySelectorAll('.dw:not([data-ok])').forEach(el=>{
+  el.dataset.ok=1;let mode='convert';const gid='dwHot'+(++wn);
+  el.innerHTML=`<svg viewBox="-250 -250 500 500" role="group" aria-label="Interactive DragWheel preview"><defs><radialGradient id="${gid}" cx="0" cy="0" r="240" gradientUnits="userSpaceOnUse"><stop offset=".3" stop-color="#ffb04d"/><stop offset="1" stop-color="#ff8000"/></radialGradient></defs><circle r="240" fill="#202125"/><g class="g"></g><circle r="74" fill="#202125"/><circle r="66" fill="#38393e"/><text class="ht" text-anchor="middle" y="2"></text><text class="hs" text-anchor="middle" y="24">photo.heic</text></svg><div class="pills"><button type="button" data-m="convert"><kbd>Shift</kbd>Convert</button><button type="button" data-m="tools"><kbd>Ctrl</kbd>Tools</button><button type="button" data-m="actions"><kbd>Alt</kbd>Actions</button></div><p aria-live="polite">Hover a slice, or pick a wheel below it.</p>`;
+  const g=el.querySelector('.g'),ht=el.querySelector('.ht'),note=el.querySelector('p');
+  const build=()=>{const set=SETS[mode],n=set.items.length,st=360/n;ht.textContent=set.hub;
+    g.innerHTML=set.items.map((l,i)=>{const m=i*st,c=pt(157,m),w=l.length>9&&l.includes(' ')?l.split(' '):[l];
+      return `<g class="sl" style="--h:url(#${gid})" tabindex="0" role="button" aria-label="${set.hub}: ${l}" data-l="${l}"><path d="${wedge(m-st/2+.9,m+st/2-.9)}"/><text text-anchor="middle">${w.map((x,k)=>`<tspan x="${c[0]}" y="${(+c[1]+5+(k-(w.length-1)/2)*18).toFixed(1)}">${x}</tspan>`).join('')}</text></g>`}).join('');
+    el.querySelectorAll('.pills button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m==mode))};
+  const on=s=>{g.querySelectorAll('.sl').forEach(x=>x.classList.toggle('on',x==s));ht.textContent=s?s.dataset.l:SETS[mode].hub};
+  g.addEventListener('mouseover',e=>{const s=e.target.closest('.sl');if(s)on(s)});
+  g.addEventListener('mouseleave',()=>on(null));
+  g.addEventListener('focusin',e=>on(e.target.closest('.sl')));
+  g.addEventListener('focusout',()=>on(null));
+  const pick=s=>{if(s)note.textContent=SETS[mode].done(s.dataset.l)};
+  g.addEventListener('click',e=>pick(e.target.closest('.sl')));
+  g.addEventListener('keydown',e=>{if(e.key=='Enter'||e.key==' '){e.preventDefault();pick(e.target.closest('.sl'))}});
+  el.querySelector('.pills').addEventListener('click',e=>{const b=e.target.closest('button');if(b){mode=b.dataset.m;build();note.textContent='Hover a slice, or pick a wheel below it.'}});
+  el.addEventListener('keydown',e=>{const m={Shift:'convert',Control:'tools',Alt:'actions'}[e.key];if(m&&!e.repeat){e.preventDefault();mode=m;build()}});
+  build();
+})}
+wheels(document);
+const pickAsset=(as,kind)=>{const by=x=>as.filter(f=>f.name.toLowerCase().endsWith('.'+x));let l=by(kind);
+  if(kind=='exe'&&l.length>1)l=l.filter(f=>!/portable/i.test(f.name)).concat(l.filter(f=>/portable/i.test(f.name)));
+  return l[0]||by('zip')[0]||as[0]};
+apps.forEach(async a=>{
+  const r=a.repo||a.name,k='rel:'+r;let rel=null;
+  try{rel=JSON.parse(sessionStorage.getItem(k))}catch(e){}
+  if(!rel){try{const res=await fetch(`https://api.github.com/repos/ilukezippo/${r}/releases/latest`,{headers:{Accept:'application/vnd.github+json'}});if(!res.ok)return;const j=await res.json();rel={tag:j.tag_name,assets:(j.assets||[]).map(x=>({name:x.name,url:x.browser_download_url}))};try{sessionStorage.setItem(k,JSON.stringify(rel))}catch(e){}}catch(e){return}}
+  const f=pickAsset(rel.assets,a.dl);if(!f)return;
+  document.querySelectorAll(`[data-dl="${a.id}"]`).forEach(b=>b.href=f.url);
+  document.querySelectorAll(`[data-ver="${a.id}"]`).forEach(v=>v.textContent=`${rel.tag?rel.tag+' · ':''}${f.name}`);
+});
 const show=(a)=>{
   $('#wIcon').src=a.icon||'data:image/svg+xml;utf8,'+encodeURIComponent(a.svg.replace('<svg ','<svg xmlns="http://www.w3.org/2000/svg" '));
   $('#wName').textContent=a.name;$('#wTag').textContent='  '+a.tag;
-  $('#screen').innerHTML=(a.shots?`<img src="img/${a.shots[0][0]}.webp" alt="${a.name}: ${a.shots[0][1]}">`:`<div class="tile">${ico(a)}<h3 style="font-size:28px">${a.name}</h3><p>${a.tag}</p></div>`)+`<a class="go" href="#${a.id}">More about ${a.name}</a>`;
+  $('#screen').innerHTML=(a.shots?media(a,a.shots[0]):`<div class="tile">${ico(a)}<h3 style="font-size:28px">${a.name}</h3><p>${a.tag}</p></div>`)+`<a class="go" href="#${a.id}">More about ${a.name}</a>`;
+  wheels($('#screen'));
   document.querySelectorAll('#task button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.id==a.id));
 };
 $('#task').innerHTML=apps.map(a=>`<button type="button" data-id="${a.id}" aria-label="${a.name}" title="${a.name}">${a.svg||`<img src="${a.icon}" alt="">`}</button>`).join('');
