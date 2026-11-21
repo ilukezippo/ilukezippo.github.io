@@ -257,11 +257,11 @@ const apps=[
  f:['Controller-first: XInput (Xbox, ROG Ally) and DirectInput (PS4, PS5)','Toggle with Shift+Insert or L2+R2+L3+R3','Toggle and apply-style cheats from a JSON library','Tray icon and Steam-style interface sounds'],
  meta:['Windows','Installer or portable','C++'],
  shots:[['to-loaded','A trainer loaded in the overlay'],['to-download','Download Cheats'],['to-choose','Choose Game']]},
-{id:'pc-savegame-manager',dl:'exe',g:2,name:'PC Savegame Manager',repo:'PC_Savegame_Manager',c:'#2b8159',icon:'img/savegame-icon.webp',tag:'Back up, restore and sync your PC game saves.',
- desc:'Type a game\'s name and it finds where the saves live using PCGamingWiki, then backs them up to timestamped ZIP files that remember where to restore them. Link a game to Google Drive to keep saves in sync across PCs.',
- f:['Save locations from PCGamingWiki, with autocomplete game search','Timestamped ZIP backups with restore paths stored inside','Restores to the original folders, with an overwrite warning','Google Drive sync between two or more PCs through a Windows junction'],
- meta:['Windows','Single .exe','Python'],
- shots:[['sg-backup','Backup tab: saves found through PCGamingWiki'],['sg-drive','Sync a game\'s saves with Google Drive']]}
+{id:'backpack',dl:'exe',g:2,name:'Backpack',repo:'Backpack',c:'#2b8159',icon:'img/bp-icon.webp',tag:'Pack up your game saves and app data. Unpack them anywhere.',
+ desc:'Formerly PC Savegame Manager. Backpack knows where 22,000+ PC games keep their saves, plus the data of apps like Plex Media Server. It backs them up to ZIP files and puts everything back after you reinstall Windows or move to a new PC.',
+ f:['Find a game\'s saves by name, or scan your whole PC and back up every game at once','Shows which games are already covered by Steam Cloud and which have no cloud backup','Back up app data: Plex, Jellyfin, Sonarr, Radarr, qBittorrent, OBS, VS Code and more','Restore to the original folders, and sync saves between PCs with Google Drive, OneDrive or Dropbox'],
+ meta:['Windows 10 / 11','Single .exe','MIT','English / العربية'],
+ shots:[['bp-games','Find a game\'s saves'],['bp-scan','Scan my PC for every game'],['bp-apps','Back up app data'],['bp-restore','Restore a backup'],['bp-sync','Cloud Sync between PCs'],['bp-light','Light theme'],['bp-arabic','Arabic, right to left']]}
 ];
 const $=s=>document.querySelector(s);
 const ico=(a,cls='')=>a.svg?a.svg:`<img src="${a.icon}" alt="" class="${cls}" width="56" height="56">`;
