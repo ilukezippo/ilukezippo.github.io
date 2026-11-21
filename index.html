@@ -131,6 +131,10 @@ dialog button{margin:10px auto 0;display:block;min-height:44px;padding:0 22px;bo
 .shots .main video,.screen video{width:100%;height:100%;object-fit:contain;background:#000;border-radius:6px}
 .shots .main:has(video){padding:0;background:#000;overflow:hidden}
 .dl-ver{font-size:13px;color:var(--mute);margin:10px 0 0;overflow-wrap:anywhere}
+.shots .main{position:relative;--pad:clamp(12px,2.2vw,24px)}
+.shots .main>img{position:absolute;inset:var(--pad);margin:auto;max-width:calc(100% - 2*var(--pad));max-height:calc(100% - 2*var(--pad))}
+.screen{--sh:clamp(240px,34vw,450px);height:var(--sh)}
+.screen>img{max-height:calc(var(--sh) - 32px)}
 @media(max-width:900px){.top,.gh,.about .wrap{grid-template-columns:minmax(0,1fr)}.app{grid-template-columns:minmax(0,1fr)}.app:nth-of-type(even) .shots{order:0}}
 @media(max-width:600px){.task{justify-content:flex-start}.bar em{display:none}.go{right:8px;top:8px;bottom:auto;padding:6px 12px;font-size:13px}.stack{grid-template-columns:minmax(0,1fr)}.nav a.l{font-size:15px}.brand{flex-basis:100%}.thumbs button{width:64px;height:46px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.screen img{transition:none}}
@@ -207,7 +211,6 @@ dialog button{margin:10px auto 0;display:block;min-height:44px;padding:0 22px;bo
 <script>
 {
 const GH='https://github.com/ilukezippo/';
-const toSvg=`<svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#e04f5f"/><rect x="12" y="18" width="40" height="28" rx="6" fill="none" stroke="#fff" stroke-width="4"/><path d="M22 32h8M26 28v8" stroke="#fff" stroke-width="4" stroke-linecap="round"/><circle cx="38" cy="30" r="2.6" fill="#fff"/><circle cx="43" cy="35" r="2.6" fill="#fff"/></svg>`;
 const cdSvg=`<svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1a9fff"/><rect x="10" y="20" width="44" height="24" rx="12" fill="#fff"/><circle cx="22" cy="32" r="5" fill="#1a9fff"/><circle cx="42" cy="29" r="2.5" fill="#1a9fff"/><circle cx="47" cy="34" r="2.5" fill="#1a9fff"/></svg>`;
 const apps=[
 {id:'dragwheel',dl:'exe',g:1,name:'DragWheel',c:'#ff8c1a',icon:'img/dragwheel-icon.webp',tag:'Drag a file. Tap a key. Drop it on the wheel.',
@@ -234,7 +237,7 @@ const apps=[
  desc:'The repair commands you are usually told to type into an admin Command Prompt, collected in one window. Tick the steps you want, press Start, and follow along with a progress bar and a live log. In English and Arabic.',
  f:['Repair: DISM ScanHealth and RestoreHealth, sfc /scannow, CHKDSK, network reset','Cleanup: temp and prefetch files, Recycle Bin, DNS cache, component store','Fixes stuck Windows Update downloads','Skip a step or cancel at any time; always-run-as-admin option'],
  meta:['Windows 10 / 11','Portable ZIP','MIT','Python'],
- chips:['DISM','SFC','CHKDSK','Network reset','Temp cleanup','DNS flush','Windows Update fix','English / العربية']},
+ shots:[['fixer-main','Choose repair and cleanup steps']]},
 {id:'turbotap',dl:'exe',g:2,name:'TurboTap',c:'#6a6aff',icon:'img/turbotap-icon.webp',tag:'Hold a button. TurboTap taps it for you.',
  desc:'Rapid-fire for your keyboard, mouse and game controller. Hold a key and it taps up to 50 times a second, or press once to auto-tap until you press again. Made for button-mashing games.',
  f:['Keyboard, mouse and controllers: DualSense, DualShock 4, Xbox, Switch Pro','1–50 taps per second, hold or toggle mode, optional human-like randomizing','Built-in tester shows the real taps per second','Limit turbo to one game window, F8 on/off hotkey, per-game profiles'],
@@ -250,16 +253,16 @@ const apps=[
  f:['Pick an .exe or .bat to run next to the game; it closes when the game exits','Search FLiNG Trainer and attach a trainer without leaving Gaming Mode','Set the game language through locale variables','One-tap launch options: desktop mode, no FSYNC, WineD3D, audio latency and more'],
  meta:['Steam Deck','Decky Loader','GPL 3.0','TypeScript'],
  shots:[['cd-menu','CheatDeck 2 in the game menu'],['cd-settings','Trainer and language settings'],['cd-trainer','A trainer running beside the game']]},
-{id:'trainer-overlay',dl:'exe',g:2,name:'Trainer Overlay',repo:'trainer-overlay',c:'#e04f5f',svg:toSvg,tag:'Use game trainers from your couch.',
+{id:'trainer-overlay',dl:'exe',g:2,name:'Trainer Overlay',repo:'trainer-overlay',c:'#7a4fba',icon:'img/to-icon.webp',tag:'Game trainers you can use from the couch.',
  desc:'A lightweight overlay for managing and using game trainers with a controller. It slides in over your game without stealing focus, reads a JSON trainer library, and can download trainers straight from GitHub. For offline, single-player games.',
  f:['Controller-first: XInput (Xbox, ROG Ally) and DirectInput (PS4, PS5)','Toggle with Shift+Insert or L2+R2+L3+R3','Toggle and apply-style cheats from a JSON library','Tray icon and Steam-style interface sounds'],
  meta:['Windows','Installer or portable','C++'],
- chips:['XInput','DirectInput','JSON library','GitHub downloads','Always on top','System tray']},
-{id:'pc-savegame-manager',dl:'exe',g:2,name:'PC Savegame Manager',repo:'PC_Savegame_Manager',c:'#2c7a5b',icon:'img/savegame-icon.webp',tag:'Find, back up and restore your game saves.',
+ shots:[['to-overlay','The overlay, driven with a controller']]},
+{id:'pc-savegame-manager',dl:'exe',g:2,name:'PC Savegame Manager',repo:'PC_Savegame_Manager',c:'#2b8159',icon:'img/savegame-icon.webp',tag:'Back up, restore and sync your PC game saves.',
  desc:'Type a game\'s name and it finds where the saves live using PCGamingWiki, then backs them up to timestamped ZIP files that remember where to restore them. Link a game to Google Drive to keep saves in sync across PCs.',
  f:['Save locations from PCGamingWiki, with autocomplete game search','Timestamped ZIP backups with restore paths stored inside','Restores to the original folders, with an overwrite warning','Google Drive sync between two or more PCs through a Windows junction'],
  meta:['Windows','Single .exe','Python'],
- chips:['PCGamingWiki','ZIP backups','One-click restore','Google Drive sync','Steam / Epic / emulators']}
+ shots:[['sg-backup','Backup tab: saves found through PCGamingWiki'],['sg-drive','Sync a game\'s saves with Google Drive']]}
 ];
 const $=s=>document.querySelector(s);
 const ico=(a,cls='')=>a.svg?a.svg:`<img src="${a.icon}" alt="" class="${cls}" width="56" height="56">`;
