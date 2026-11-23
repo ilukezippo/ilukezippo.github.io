@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ilukezippo Apps</title>
+<link rel="icon" type="image/svg+xml" href="img/logo.svg">
+<link rel="apple-touch-icon" href="img/logo-180.png">
+<meta property="og:image" content="https://ilukezippo.github.io/img/logo-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -29,10 +32,14 @@ h1,h2,h3{font-family:"Inter Tight",Inter,system-ui,sans-serif;letter-spacing:-.0
 .hero{background:var(--g);color:#fff;padding-top:20px;padding-bottom:0}
 .nav{display:flex;flex-wrap:wrap;align-items:center;gap:4px 24px;margin-bottom:clamp(24px,3.5vw,44px)}
 .brand{display:flex;align-items:center;gap:10px;font:700 18px "Inter Tight",sans-serif;text-decoration:none;margin-right:auto}
-.brand b{width:34px;height:34px;border-radius:9px;background:var(--lime);color:var(--g);display:grid;place-items:center;font-size:17px}
+.brand img{width:36px;height:36px}
 .nav a.l{text-decoration:none;color:#cfe3dc;font-weight:500;padding:10px 0}
 .nav a.l:hover{color:#fff}
 .top{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px 48px;align-items:end;margin-bottom:28px}
+.lockup{display:flex;align-items:center;gap:clamp(16px,2.4vw,28px)}
+.lockup>img{width:clamp(76px,9vw,116px);height:auto;flex:none;filter:drop-shadow(0 14px 26px rgba(0,0,0,.35));transform:rotate(-6deg)}
+.byline{margin:22px 0 0;color:#a9cbc0;font-size:15px}
+.byline b{color:#fff;font-weight:600}
 .top h1{font-size:clamp(36px,5.2vw,64px);font-weight:800}
 .top p{margin:0;color:#cfe3dc;font-size:17px;max-width:46ch}
 .figs{display:flex;gap:28px;margin-top:18px;flex-wrap:wrap}
@@ -58,14 +65,22 @@ h1,h2,h3{font-family:"Inter Tight",Inter,system-ui,sans-serif;letter-spacing:-.0
 .task button[aria-pressed=true]{background:#2b3a36}
 .task button[aria-pressed=true]::after{content:"";position:absolute;bottom:3px;width:18px;height:3px;border-radius:2px;background:var(--lime)}
 .task img,.task svg{width:32px;height:32px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;padding:5px;border-radius:14px;background:var(--panel);width:max-content;max-width:100%}
+.tabs button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:0;border-radius:10px;background:transparent;color:var(--mute);font:600 15px Inter,sans-serif;cursor:pointer}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected=true]{background:var(--g);color:#fff}
+.tabs svg{width:18px;height:18px;flex:none}
+.tabs span{font-size:13px;padding:1px 8px;border-radius:999px;background:color-mix(in srgb,currentColor 14%,transparent)}
+.tabnote{margin:14px 0 0;color:var(--mute);max-width:70ch}
+.app[hidden]{display:none}
 .groups{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
 .groups a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1px solid var(--line);border-radius:999px;text-decoration:none;font-weight:600}
 .groups a:hover{border-color:var(--ink)}
-.gh{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:12px 48px;align-items:end;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.gh{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 48px;align-items:center;padding-bottom:18px;border-bottom:1px solid var(--line)}
 .gh h2{font-size:clamp(30px,3.6vw,44px)}
 .gh p{margin:0;color:var(--mute);max-width:60ch}
 .app{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px 48px;padding-block:clamp(36px,5vw,64px);border-bottom:1px solid var(--line);align-items:start}
-.app:nth-of-type(even) .shots{order:2}
+.app.flip .shots{order:2}
 .shots .main{background:color-mix(in srgb,var(--c) 14%,var(--panel));border-radius:14px;padding:clamp(12px,2.2vw,24px);display:grid;place-items:center;aspect-ratio:16/10.5}
 .shots .main>img{cursor:zoom-in}
 .thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
@@ -133,8 +148,8 @@ dialog button{margin:10px auto 0;display:block;min-height:44px;padding:0 22px;bo
 .shots .main{position:relative;--pad:clamp(12px,2.2vw,24px)}
 .shots .main>img,.screen>img{position:absolute;inset:var(--pad);width:calc(100% - 2*var(--pad));height:calc(100% - 2*var(--pad));max-width:none;object-fit:contain;filter:drop-shadow(0 10px 22px rgba(0,0,0,.35))}
 .screen{--pad:16px}
-@media(max-width:900px){.top,.gh,.about .wrap{grid-template-columns:minmax(0,1fr)}.app{grid-template-columns:minmax(0,1fr)}.app:nth-of-type(even) .shots{order:0}}
-@media(max-width:600px){.task{justify-content:flex-start}.bar em{display:none}.go{right:8px;top:8px;bottom:auto;padding:6px 12px;font-size:13px}.stack{grid-template-columns:minmax(0,1fr)}.nav a.l{font-size:15px}.brand{flex-basis:100%}.thumbs button{width:64px;height:46px}}
+@media(max-width:900px){.top,.gh,.about .wrap{grid-template-columns:minmax(0,1fr)}.app{grid-template-columns:minmax(0,1fr)}.app.flip .shots{order:0}}
+@media(max-width:600px){.task{justify-content:flex-start}.bar em{display:none}.go{right:8px;top:8px;bottom:auto;padding:6px 12px;font-size:13px}.stack{grid-template-columns:minmax(0,1fr)}.nav a.l{font-size:14px}.nav{gap:2px 16px}.brand{flex-basis:100%}.thumbs button{width:64px;height:46px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.screen img{transition:none}}
 </style>
 </head>
@@ -142,19 +157,20 @@ dialog button{margin:10px auto 0;display:block;min-height:44px;padding:0 22px;bo
 <header class="band hero" id="top">
   <div class="wrap">
     <nav class="nav">
-      <a class="brand" href="#top"><b>il</b>ilukezippo</a>
-      <a class="l" href="#everyday">Everyday tools</a>
-      <a class="l" href="#gaming">For gamers</a>
-      <a class="l" href="#phone">For your phone</a>
+      <a class="brand" href="#top"><img src="img/logo.svg" alt="" width="36" height="36">ilukezippo</a>
+      <a class="l" href="#windows">Windows</a>
+      <a class="l" href="#steam-deck">Steam Deck</a>
+      <a class="l" href="#android">Android</a>
       <a class="l" href="#about">About</a>
       <a class="l" href="https://github.com/ilukezippo">GitHub</a>
     </nav>
     <div class="top">
       <div>
-        <h1>Free, focused apps for Windows, Android and Steam Deck</h1>
+        <div class="lockup"><img src="img/logo.svg" alt="ilukezippo logo" width="116" height="116"><h1>Handmade apps that save you clicks</h1></div>
+        <p class="byline">Made in Kuwait by <b>ilukezippo</b>, also known as BoYaoqub</p>
       </div>
       <div>
-        <p>Small tools that each do one job well: convert files, fix contacts, fetch subtitles, update apps, repair Windows, download videos on your phone, and make games easier to play. Open source, English and Arabic friendly.</p>
+        <p>Free, open-source apps for Windows, Steam Deck and Android. Each one does a single job well: convert files, fix contacts, fetch subtitles, update apps, repair Windows, download videos on your phone and make games easier to play. In English and Arabic.</p>
         <div class="figs" id="figs"></div>
       </div>
     </div>
@@ -167,22 +183,11 @@ dialog button{margin:10px auto 0;display:block;min-height:44px;padding:0 22px;bo
 </header>
 
 <main>
-  <section class="band" id="everyday">
+  <section class="band" id="apps">
     <div class="wrap">
-      <div class="gh"><h2>Everyday Windows tools</h2><p>For files, contacts, subtitles and keeping your PC healthy. Your data stays on your computer.</p></div>
-      <div id="g1"></div>
-    </div>
-  </section>
-  <section class="band" id="gaming" style="padding-top:0">
-    <div class="wrap">
-      <div class="gh"><h2>For gamers</h2><p>Turbo buttons, Xbox disc images, trainers on Steam Deck and in a controller overlay, and save backups that follow you between PCs.</p></div>
-      <div id="g2"></div>
-    </div>
-  </section>
-  <section class="band" id="phone" style="padding-top:0">
-    <div class="wrap">
-      <div class="gh"><h2>For your phone</h2><p>Android apps with no ads and no tracking. Installed straight from GitHub.</p></div>
-      <div id="g3"></div>
+      <div class="gh"><h2>The apps</h2><div class="tabs" role="tablist" aria-label="Filter apps by platform" id="tabs"></div></div>
+      <p class="tabnote" id="tabnote" aria-live="polite"></p>
+      <div id="list"></div>
     </div>
   </section>
 </main>
@@ -190,20 +195,19 @@ dialog button{margin:10px auto 0;display:block;min-height:44px;padding:0 22px;bo
 <section class="band about" id="about">
   <div class="wrap">
     <div>
-      <h2>Made by ilukezippo in Kuwait</h2>
-      <p>I'm a developer who also goes by BoYaoqub. I build the tools I wish existed: clean, offline-first apps with dark interfaces, Arabic support where it matters, and one-click updates from GitHub.</p>
-      <p>Every app here is free. If one saves you time, a star on GitHub helps other people find it.</p>
+      <div class="lockup" style="margin-bottom:18px"><img src="img/logo.svg" alt="" width="72" height="72" style="width:72px"><h2 style="margin:0">Hi, I'm BoYaoqub</h2></div>
+      <p>I'm a self-taught developer from Kuwait, known on GitHub as ilukezippo. Every app on this page started as a small annoyance in my own day: a HEIC photo that wouldn't open, a contacts file Windows couldn't read, a game that wanted me to mash one button for an hour.</p>
+      <p>Instead of putting up with it, I build the tool, polish it until I'd happily use it every day, and share it here for free. Ideas and bug reports are always welcome on GitHub.</p>
       <div class="btns" style="margin-top:20px">
         <a class="btn p" href="https://github.com/ilukezippo">Follow on GitHub</a>
         <a class="btn" href="https://buymeacoffee.com/ilukezippo">Buy me a coffee</a>
       </div>
     </div>
     <div class="stack">
-      <div><strong>Python</strong><span>DragWheel, SubScout, TurboTap, VCF Desk and more</span></div>
-      <div><strong>C# / WPF</strong><span>XBOX ISO Extractor</span></div>
-      <div><strong>TypeScript</strong><span>CheatDeck 2 for Decky Loader</span></div>
-      <div><strong>C++</strong><span>Trainer Overlay</span></div>
-      <div><strong>Kotlin</strong><span>Grabbit for Android</span></div>
+      <div><strong>Free, no ads</strong><span>No subscriptions, accounts or upsells. Ever.</span></div>
+      <div><strong>Your data stays yours</strong><span>Apps work offline. Nothing is uploaded or tracked.</span></div>
+      <div><strong>English and العربية</strong><span>Arabic names, subtitles and right-to-left layouts done properly.</span></div>
+      <div><strong>Open source</strong><span>Every line is on GitHub, in Python, C#, TypeScript, C++ and Kotlin.</span></div>
     </div>
   </div>
 </section>
@@ -289,10 +293,29 @@ const card=a=>{
     :`<div class="main noshot">${ico(a)}<ul>${a.chips.map(c=>`<li>${c}</li>`).join('')}</ul></div>`;
   return `<article class="app" id="${a.id}" style="--c:${a.c}"><div class="shots">${shot}</div><div class="info"><div class="head">${ico(a)}<div><h3>${a.name}</h3><div class="tag">${a.tag}</div></div></div><p>${a.desc}</p><ul class="f">${a.f.map(x=>`<li>${x}</li>`).join('')}</ul><div class="meta">${a.meta.map(m=>`<span>${m}</span>`).join('')}</div><div class="btns"><a class="btn p" data-dl="${a.id}" href="${repo(a)}/releases/latest">${dlIcon}Download</a><a class="btn" href="${repo(a)}">${ghIcon}View on GitHub</a>${a.site?`<a class="btn" href="${a.site}">Website</a>`:''}</div><p class="dl-ver" data-ver="${a.id}">Latest release on GitHub</p></div></article>`;
 };
-$('#g1').innerHTML=apps.filter(a=>a.g==1).map(card).join('');
-$('#g2').innerHTML=apps.filter(a=>a.g==2).map(card).join('');
-$('#g3').innerHTML=apps.filter(a=>a.g==3).map(card).join('');
-$('#figs').innerHTML=`<div><strong>${apps.length}</strong>apps</div><div><strong>Free</strong>and open source</div>`;
+const plat=a=>a.id=='cheatdeck-2'?'steam-deck':a.g==3?'android':'windows';
+const order=[...apps.filter(a=>a.g==1),...apps.filter(a=>a.g==2),...apps.filter(a=>a.g==3)];
+$('#list').innerHTML=order.map(card).join('');
+const TABS=[['all','All apps','','Everything, newest additions included.'],
+ ['windows','Windows','<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5 10.5 4.5v7H3zM12 4.3 21 3v8.5h-9zM3 13h7.5v7L3 19zM12 13h9v8l-9-1.3z"/></svg>','Desktop tools for files, contacts, subtitles, repairs, games and backups. Your data stays on your PC.'],
+ ['steam-deck','Steam Deck','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="7" cy="12" r="1.6" fill="currentColor"/><rect x="10" y="9.5" width="4" height="5" rx="1"/><circle cx="17" cy="12" r="1.6" fill="currentColor"/></svg>','Decky Loader plugins that work right inside Gaming Mode.'],
+ ['android','Android','<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 10h14v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2zM5.5 9a6.5 5.5 0 0 1 13 0zM8.2 3.3l1.5 2.4M15.8 3.3l-1.5 2.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="9.5" cy="7" r=".9" fill="var(--bg)"/><circle cx="14.5" cy="7" r=".9" fill="var(--bg)"/></svg>','Phone apps with no ads and no tracking, installed straight from GitHub.']];
+$('#tabs').innerHTML=TABS.map(([k,l,ic])=>`<button type="button" role="tab" data-t="${k}" aria-selected="false">${ic}${l}<span>${k=='all'?apps.length:apps.filter(a=>plat(a)==k).length}</span></button>`).join('');
+const setTab=(k,scroll)=>{
+  if(!TABS.some(t=>t[0]==k))k='all';
+  let n=0;
+  order.forEach(a=>{const el=document.getElementById(a.id),on=k=='all'||plat(a)==k;el.hidden=!on;if(on)el.classList.toggle('flip',n++%2==1)});
+  document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t==k));
+  $('#tabnote').textContent=TABS.find(t=>t[0]==k)[3];
+  if(scroll)$('#apps').scrollIntoView();
+};
+$('#tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b){setTab(b.dataset.t);try{history.replaceState(null,'',b.dataset.t=='all'?'#apps':'#'+b.dataset.t)}catch(x){}}});
+const fromHash=scroll=>{const h=location.hash.slice(1);
+  if(TABS.some(t=>t[0]==h)){setTab(h,true);return}
+  const a=apps.find(x=>x.id==h);if(a&&document.getElementById(a.id).hidden){setTab('all');document.getElementById(a.id).scrollIntoView()}};
+setTab('all');fromHash(true);
+addEventListener('hashchange',()=>fromHash(true));
+$('#figs').innerHTML=`<div><strong>${apps.length}</strong>apps</div><div><strong>3</strong>platforms</div><div><strong>Free</strong>and open source</div>`;
 
 document.addEventListener('click',e=>{
   const t=e.target.closest('.thumbs button');
