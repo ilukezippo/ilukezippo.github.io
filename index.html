@@ -170,7 +170,7 @@ dialog button{margin:10px auto 0;display:block;min-height:44px;padding:0 22px;bo
         <p class="byline">Made in Kuwait by <b>ilukezippo</b>, also known as BoYaoqub</p>
       </div>
       <div>
-        <p>Free, open-source apps for Windows, Steam Deck and Android. Each one does a single job well: convert files, fix contacts, fetch subtitles, update apps, repair Windows, download videos on your phone and make games easier to play. In English and Arabic.</p>
+        <p>Free, open-source apps for Windows, Steam Deck and Android. Each one does a single job well: convert files, fix contacts, fetch subtitles, update apps, repair Windows, download videos on your phone, turn a Galaxy Z Fold into a laptop and make games easier to play. In English and Arabic.</p>
         <div class="figs" id="figs"></div>
       </div>
     </div>
@@ -279,7 +279,12 @@ const apps=[
  f:['144p to 4K in MP4, MKV or WEBM, or audio only as MP3, M4A or OPUS','Instagram reels, carousels, stories and private posts you can see','Record live streams, plus a screen recorder with app sound, a countdown and a Record button in the notification shade','Fast multi-connection downloads; convert videos, songs and pictures (JPG, PNG, WebP, PDF); Arabic and English'],
  meta:['Android 7.0+','APK','MIT','Kotlin'],
  hero:['gr-combo','Share a link, pick the quality, download'],
- shots:[['gr-combo','Instagram carousel, quality choices and downloads'],['gr-video','Pick the quality and format'],['gr-downloads','Downloads, screen recorder and converter'],['gr-arabic','Settings and the Arabic interface']]}
+ shots:[['gr-combo','Instagram carousel, quality choices and downloads'],['gr-video','Pick the quality and format'],['gr-downloads','Downloads, screen recorder and converter'],['gr-arabic','Settings and the Arabic interface']]},
+{id:'lapfold',dl:'apk',g:3,name:'LapFold',c:'#0078d4',icon:'img/lapfold-icon.webp',tag:'Unfold it. Bend it. It\'s a laptop.',
+ desc:'Turns the bottom half of a Galaxy Z Fold into a Windows-style keyboard and trackpad, so the top half works like a laptop screen. It works in any app, and with Splashtop the trackpad moves your PC\'s own mouse pointer. Gboard stays your keyboard.',
+ f:['Full Windows layout: Esc, F1–F12, Ctrl, Win, Alt, arrows and key repeat','Trackpad with tap to click, right-click, two-finger scroll and drag, plus a scroll strip and mouse Back, Forward and PrtSc','Auto split screen: your app on top, LapFold below; turn it on from the notification or Quick Settings','Move the keyboard anywhere, resize every part, hide it with a swipe-down animation; dark and light themes'],
+ meta:['Android 13+','APK','MIT','Kotlin'],
+ shots:[['lf-laptop','Your app on top, keyboard and trackpad below'],['lf-dark','Dark theme'],['lf-light','Light theme']]}
 ];
 const $=s=>document.querySelector(s);
 const ico=(a,cls='')=>a.svg?a.svg:`<img src="${a.icon}" alt="" class="${cls}" width="56" height="56">`;
