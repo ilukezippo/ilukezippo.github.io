@@ -229,10 +229,10 @@ const apps=[
  meta:['Windows 10 / 11','Installer or portable','MIT','Python'],
  hero:['dw-combo','Try the wheel: hover a slice','wheel'],
  shots:[['/DragWheel/video/dragwheel-poster.jpg','Watch the video (under 2 minutes)','video'],['dw-slices','Choose which slices each wheel shows'],['dw-editor','Built-in photo editor'],['dw-archives','Archive tools'],['dw-arabic','Full Arabic interface']]},
-{id:'vcf-desk',dl:'exe',g:1,name:'VCF Desk',repo:'VCF-Desk',c:'#7b8cff',icon:'img/vcf-icon.webp',tag:'Contacts manager for Windows.',
- desc:'A free, modern vCard (.vcf) editor. Open the contacts exported from your phone, fix them, and send them anywhere. Fields it doesn\'t display are kept exactly as they were, and Arabic names are never garbled.',
- f:['Opens exports from Android, iPhone, Google Contacts, Outlook and Samsung','Search by name, phone or email; bulk-edit many contacts at once','Import from vCard, Excel, CSV or Access, with Arabic headings matched automatically','Export for Android, iPhone, Google, Outlook, Excel or Access, or edit the raw vCard'],
- meta:['Windows 10 / 11','Installer or portable','MIT','Python'],
+{id:'vcf-desk',dl:'exe',dl2:'apk',also:'android',g:1,name:'VCF Desk',repo:'VCF-Desk',c:'#7b8cff',icon:'img/vcf-icon.webp',tag:'Contacts manager for Windows and Android.',
+ desc:'A free, modern vCard (.vcf) editor. Open the contacts exported from your phone, fix them, and send them anywhere. On Android it edits the phone\'s own contacts directly, including your Google accounts, which sync to Google Contacts by themselves. Fields it doesn\'t display are kept exactly as they were, and Arabic names are never garbled.',
+ f:['Opens exports from Android, iPhone, Google Contacts, Outlook and Samsung','Search by name, phone or email; bulk-edit many contacts at once','Import from vCard, Excel, CSV or Access, with Arabic headings matched automatically','Export for Android, iPhone, Google, Outlook, Excel or Access, or edit the raw vCard','Android app: bulk edit with preview, automatic backup and undo, and a two-pane view on foldables'],
+ meta:['Windows 10 / 11','Android 8+','Installer, portable or APK','MIT','Python · Kotlin'],
  shots:[['vcf-main','Contact list and editor'],['vcf-bulk','Bulk edit a field on many contacts'],['vcf-import','Import from Excel, CSV or Access'],['vcf-export','Export to any format'],['vcf-raw','Raw vCard view']]},
 {id:'subscout',dl:'exe',g:1,name:'SubScout',c:'#7c5cff',icon:'img/subscout-icon.webp',tag:'English and Arabic subtitles for your whole library.',
  desc:'Point it at a movie, TV-series or anime folder. SubScout scans every video, works out the title, year and IMDb ID, and downloads only the subtitles that are missing, saved as Movie.en.srt and Movie.ar.srt.',
@@ -289,6 +289,8 @@ const apps=[
 const $=s=>document.querySelector(s);
 const ico=(a,cls='')=>a.svg?a.svg:`<img src="${a.icon}" alt="" class="${cls}" width="56" height="56">`;
 const ghIcon='<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.71 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.66 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 8 0Z"/></svg>';
+const winIcon='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5 10.5 4.5v7H3zM12 4.3 21 3v8.5h-9zM3 13h7.5v7L3 19zM12 13h9v8l-9-1.3z"/></svg>';
+const andIcon='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.5 17a8.5 8.5 0 0 1 17 0z"/><path d="M7 7l2 3.2M17 7l-2 3.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="8.8" cy="13.6" r="1.1" fill="var(--bg,#0e1016)"/><circle cx="15.2" cy="13.6" r="1.1" fill="var(--bg,#0e1016)"/></svg>';
 const dlIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg>';
 const repo=a=>GH+(a.repo||a.name);
 const src=k=>k[0]=='/'?k:`img/${k}.webp`;
@@ -296,20 +298,21 @@ const media=(a,s)=>s[2]=='wheel'?`<div class="dw"></div>`:s[2]=='video'?`<video 
 const card=a=>{
   const shot=a.shots?`<div class="main">${media(a,a.shots[0])}</div>`+(a.shots.length>1?`<div class="thumbs">${a.shots.map((s,i)=>`<button type="button" aria-pressed="${i==0}" data-app="${a.id}" data-i="${i}" aria-label="${s[1]}"><img src="${src(s[0])}" alt="" loading="lazy"></button>`).join('')}</div>`:'')
     :`<div class="main noshot">${ico(a)}<ul>${a.chips.map(c=>`<li>${c}</li>`).join('')}</ul></div>`;
-  return `<article class="app" id="${a.id}" style="--c:${a.c}"><div class="shots">${shot}</div><div class="info"><div class="head">${ico(a)}<div><h3>${a.name}</h3><div class="tag">${a.tag}</div></div></div><p>${a.desc}</p><ul class="f">${a.f.map(x=>`<li>${x}</li>`).join('')}</ul><div class="meta">${a.meta.map(m=>`<span>${m}</span>`).join('')}</div><div class="btns"><a class="btn p" data-dl="${a.id}" href="${repo(a)}/releases/latest">${dlIcon}Download</a><a class="btn" href="${repo(a)}">${ghIcon}View on GitHub</a>${a.site?`<a class="btn" href="${a.site}">Website</a>`:''}</div><p class="dl-ver" data-ver="${a.id}">Latest release on GitHub</p></div></article>`;
+  return `<article class="app" id="${a.id}" style="--c:${a.c}"><div class="shots">${shot}</div><div class="info"><div class="head">${ico(a)}<div><h3>${a.name}</h3><div class="tag">${a.tag}</div></div></div><p>${a.desc}</p><ul class="f">${a.f.map(x=>`<li>${x}</li>`).join('')}</ul><div class="meta">${a.meta.map(m=>`<span>${m}</span>`).join('')}</div><div class="btns">${a.dl2?`<a class="btn p" data-dl="${a.id}" href="${repo(a)}/releases/latest">${winIcon}Download for Windows</a><a class="btn p" data-dl2="${a.id}" href="${repo(a)}/releases/latest">${andIcon}Download for Android</a>`:`<a class="btn p" data-dl="${a.id}" href="${repo(a)}/releases/latest">${dlIcon}Download</a>`}<a class="btn" href="${repo(a)}">${ghIcon}View on GitHub</a>${a.site?`<a class="btn" href="${a.site}">Website</a>`:''}</div><p class="dl-ver" data-ver="${a.id}">Latest release on GitHub</p></div></article>`;
 };
 const plat=a=>a.id=='cheatdeck-2'?'steam-deck':a.g==3?'android':'windows';
+const onTab=(a,k)=>plat(a)==k||a.also==k;
 const order=[...apps.filter(a=>a.g==1),...apps.filter(a=>a.g==2),...apps.filter(a=>a.g==3)];
 $('#list').innerHTML=order.map(card).join('');
 const TABS=[['all','All apps','','Everything, newest additions included.'],
  ['windows','Windows','<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5 10.5 4.5v7H3zM12 4.3 21 3v8.5h-9zM3 13h7.5v7L3 19zM12 13h9v8l-9-1.3z"/></svg>','Desktop tools for files, contacts, subtitles, repairs, games and backups. Your data stays on your PC.'],
  ['steam-deck','Steam Deck','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="7" cy="12" r="1.6" fill="currentColor"/><rect x="10" y="9.5" width="4" height="5" rx="1"/><circle cx="17" cy="12" r="1.6" fill="currentColor"/></svg>','Decky Loader plugins that work right inside Gaming Mode.'],
  ['android','Android','<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 10h14v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2zM5.5 9a6.5 5.5 0 0 1 13 0zM8.2 3.3l1.5 2.4M15.8 3.3l-1.5 2.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="9.5" cy="7" r=".9" fill="var(--bg)"/><circle cx="14.5" cy="7" r=".9" fill="var(--bg)"/></svg>','Phone apps with no ads and no tracking, installed straight from GitHub.']];
-$('#tabs').innerHTML=TABS.map(([k,l,ic])=>`<button type="button" role="tab" data-t="${k}" aria-selected="false">${ic}${l}<span>${k=='all'?apps.length:apps.filter(a=>plat(a)==k).length}</span></button>`).join('');
+$('#tabs').innerHTML=TABS.map(([k,l,ic])=>`<button type="button" role="tab" data-t="${k}" aria-selected="false">${ic}${l}<span>${k=='all'?apps.length:apps.filter(a=>onTab(a,k)).length}</span></button>`).join('');
 const setTab=(k,scroll)=>{
   if(!TABS.some(t=>t[0]==k))k='all';
   let n=0;
-  order.forEach(a=>{const el=document.getElementById(a.id),on=k=='all'||plat(a)==k;el.hidden=!on;if(on)el.classList.toggle('flip',n++%2==1)});
+  order.forEach(a=>{const el=document.getElementById(a.id),on=k=='all'||onTab(a,k);el.hidden=!on;if(on)el.classList.toggle('flip',n++%2==1)});
   document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t==k));
   $('#tabnote').textContent=TABS.find(t=>t[0]==k)[3];
   if(scroll)$('#apps').scrollIntoView();
@@ -367,7 +370,9 @@ apps.forEach(async a=>{
   if(!rel){try{const res=await fetch(`https://api.github.com/repos/ilukezippo/${r}/releases/latest`,{headers:{Accept:'application/vnd.github+json'}});if(!res.ok)return;const j=await res.json();rel={tag:j.tag_name,assets:(j.assets||[]).map(x=>({name:x.name,url:x.browser_download_url}))};try{sessionStorage.setItem(k,JSON.stringify(rel))}catch(e){}}catch(e){return}}
   const f=pickAsset(rel.assets,a.dl);if(!f)return;
   document.querySelectorAll(`[data-dl="${a.id}"]`).forEach(b=>b.href=f.url);
-  document.querySelectorAll(`[data-ver="${a.id}"]`).forEach(v=>v.textContent=`${rel.tag?rel.tag+' · ':''}${f.name}`);
+  const f2=a.dl2&&rel.assets.find(x=>x.name.toLowerCase().endsWith('.'+a.dl2));
+  if(f2)document.querySelectorAll(`[data-dl2="${a.id}"]`).forEach(b=>b.href=f2.url);
+  document.querySelectorAll(`[data-ver="${a.id}"]`).forEach(v=>v.textContent=`${rel.tag?rel.tag+' · ':''}${f.name}${f2?' · '+f2.name:''}`);
 });
 const show=(a)=>{
   $('#wIcon').src=a.icon||'data:image/svg+xml;utf8,'+encodeURIComponent(a.svg.replace('<svg ','<svg xmlns="http://www.w3.org/2000/svg" '));
